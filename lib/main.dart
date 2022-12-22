@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'common/colors.dart';
 import 'view/home_view.dart';
 
 void main() {
@@ -15,6 +16,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       initialRoute: '/home',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        scaffoldBackgroundColor: primaryColor,
+        appBarTheme: AppBarTheme(color: primaryColor),
+        backgroundColor: primaryColor,
+
+
+      ),
       getPages: [
         GetPage(name: '/home', page: () => HomeView()),
       ],);

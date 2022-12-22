@@ -16,29 +16,31 @@ class MovieDetails extends StatelessWidget {
           appBar: AppBar(title: Text("${controller.result[index].title}")),
           body: SafeArea(
             child: Column(children: [
-              GestureDetector(onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        fullscreenDialog: true,
-                        builder: (BuildContext context) {
-                          return Scaffold(
-                            body: GestureDetector(
-                              child: Container(
-                                height: MediaQuery.of(context).size.height,
-                                width: MediaQuery.of(context).size.width,
-                                child: Image.network(
-                                  "${AppUrl.imageUrl}" +
-                                      controller.result[index].posterPath.toString(),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          fullscreenDialog: true,
+                          builder: (BuildContext context) {
+                            return Scaffold(
+                              body: GestureDetector(
+                                child: Container(
+                                  height: MediaQuery.of(context).size.height,
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Image.network(
+                                    "${AppUrl.imageUrl}" +
+                                        controller.result[index].posterPath
+                                            .toString(),
+                                  ),
                                 ),
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
                               ),
-                              onTap: () {
-                                Navigator.pop(context);
-                              },
-                            ),
-                          );
-                        }));
-              },
+                            );
+                          }));
+                },
                 child: Container(
                   child: Image.network(
                     "${AppUrl.imageUrl}" +
@@ -49,13 +51,65 @@ class MovieDetails extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                 ),
               ),
-              // Container(,),
-              Container(padding: EdgeInsets.all(16),
 
+              Row(
+                children: [
+                  Container(
+                      padding: EdgeInsets.all(16),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'Release Date\n${controller.result[index].releaseDate.toString().substring(0, 10)}',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                      )),
+                  Container(
+                      padding: EdgeInsets.all(16),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'Popularity\n${controller.result[index].popularity.toString()}',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                      )),
+
+                  Container(
+                      padding: EdgeInsets.all(16),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'Vote Average\n${controller.result[index].voteAverage.toString()}/10',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                      )),
+
+                ],
+              ),
+              Container(
+                  padding: EdgeInsets.all(16),
                   child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text('Overview\n${controller.result[index].overview }',style: TextStyle(fontSize: 18,color: Colors.grey,),textAlign: TextAlign.left,),
-              )),
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Overview\n${controller.result[index].overview}',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.grey,
+                      ),
+                      textAlign: TextAlign.left,
+                    ),
+                  )),
             ]),
           ),
         );
